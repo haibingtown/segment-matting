@@ -1,5 +1,5 @@
 *.js linguist-language=react
 *.css linguist-language=react
 *.html linguist-language=react
-*.tsx linguist-language=react
+*.ts linguist-language=react
 *.scss linguist-language=react
