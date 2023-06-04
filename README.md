@@ -1,6 +1,6 @@
 # Segment Matting
 
-Segment Matting is a project aimed at improving the quality and performance of image matting using the SAM (Segment Anything with Matting) model. It focuses on optimizing the matting process to reduce jagged edges and improve the overall accuracy of the segmentation. This project integrates the capabilities of [segment-anything.com](https://segment-anything.com) and leverages the resources provided by the [meta-sam-demo](https://github.com/MiscellaneousStuff/meta-sam-demo) repository.
+Segment Matting is a project aimed at improving the quality and performance of image matting using the SAM (Segment Anything Model) model. It focuses on optimizing the matting process to reduce jagged edges and improve the overall accuracy of the segmentation. This project integrates the capabilities of [segment-anything.com](https://segment-anything.com) and leverages the resources provided by the [meta-sam-demo](https://github.com/MiscellaneousStuff/meta-sam-demo) repository.
 
 ## Overview
 
@@ -11,7 +11,6 @@ The Segment Matting project combines the power of the SAM model and the user-fri
 - Provide a user-friendly interface for easy interaction and seamless integration with other applications.
 
 ## Getting Started
-
 To get started with the Segment Matting project, follow these steps:
 
 1. Clone the [segment-matting](https://github.com/haibingtown/segment-matting) repository to your local machine.
@@ -19,31 +18,39 @@ To get started with the Segment Matting project, follow these steps:
    $ git clone https://github.com/haibingtown/segment-matting.git
 ```
 2. Start the Backend
-Navigate to the server directory and install the required dependencies:
+- Navigate to the server directory and install the required dependencies:
 
 ```shell
     $ cd server
     $ pip install -r requirements.txt
 ```
-Run the model.py file to start the backend:
+- Run the model.py file to start the backend:
 ```shell
     $ python model.py
 ```
 3. Start the Frontend
-Navigate to the web directory and install the required dependencies:
+- Navigate to the web directory and install the required dependencies:
 ```shell
     $ cd web
     $ npm i
 ```
-Start the frontend development server:
+- Start the frontend development server:
 ```shell
     $ npm start
 ```
 4. Access the Application
-Open your web browser and visit http://localhost:3000/ to access the project.
+Open your web browser and visit http://localhost:3000/ to access the project. You will see as below, then just click Upload button.
+
+![img.png](server/assets/img.png)
 
 ## Matting
-todo
+
+|         | Mask                                | Result 2                                   |
+|---------|-------------------------------------|--------------------------------------------|
+| Image 1 | ![Mask 1](server/assets/3_mask.png) | ![Result 2](server/assets/3_mat_alpha.png) |
+| Image 2 | ![Mask 1](server/assets/4_mask.png) | ![Result 2](server/assets/4_mat_alpha.png) |
+
+
 ## Export ONNX
 todo
 ## Contributing
