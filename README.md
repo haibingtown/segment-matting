@@ -57,10 +57,10 @@ Open your web browser and visit http://localhost:3000/ to access the project. Yo
 
 Currently, the alpha-matting algorithm is being used to achieve image cutout. The specific results are as follows:
 
-|         | Mask                                | Result 2                                   |
+|         | Mask                                | Matting Result                             |
 |---------|-------------------------------------|--------------------------------------------|
-| Image 1 | ![Mask 1](server/assets/3_mask.png) | ![Result 2](server/assets/3_mat_alpha.png) |
-| Image 2 | ![Mask 1](server/assets/4_mask.png) | ![Result 2](server/assets/4_mat_alpha.png) |
+| Image 1 | ![Mask 1](server/assets/3_mask.png) | ![Result 1](server/assets/3_mat_alpha.png) |
+| Image 2 | ![Mask 2](server/assets/4_mask.png) | ![Result 2](server/assets/4_mat_alpha.png) |
 
 
 ## Contributing
