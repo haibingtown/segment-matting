@@ -24,6 +24,12 @@ To get started with the Segment Matting project, follow these steps:
     $ cd server
     $ pip install -r requirements.txt
 ```
+- Add model. Download the official model, and then put it into server/model/ folder.
+
+  -  **`default` or `vit_h`: [ViT-H SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth)**
+  - `vit_l`: [ViT-L SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_l_0b3195.pth)
+  - `vit_b`: [ViT-B SAM model.](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth)
+
 - Run the model.py file to start the backend:
 ```shell
     $ python model.py
@@ -33,6 +39,10 @@ To get started with the Segment Matting project, follow these steps:
 ```shell
     $ cd web
     $ npm i
+```
+- Export ONNX model.To export the ONNX model, make sure to download the official model before proceeding with this step. Please refer to the previous steps for detailed instructions.
+```shell
+python scripts/export_onnx_model.py --checkpoint server/model/{your model}.pth --model-type {you model type} --output web/public/sam_quantized.onnx 
 ```
 - Start the frontend development server:
 ```shell
@@ -44,6 +54,8 @@ Open your web browser and visit http://localhost:3000/ to access the project. Yo
 ![img.png](server/assets/img.png)
 
 ## Matting
+
+Currently, the alpha-matting algorithm is being used to achieve image cutout. The specific results are as follows:
 
 |         | Mask                                | Result 2                                   |
 |---------|-------------------------------------|--------------------------------------------|

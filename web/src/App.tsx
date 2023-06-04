@@ -109,7 +109,7 @@ const App = () => {
     const initModel = async () => {
       try {
         // if (process.env.MODEL_DIR === undefined) return;
-        const MODEL_DIR = "./sam_vit_h_4b8939_quantized3333356678.onnx";
+        const MODEL_DIR = "./sam_quantized.onnx";
         // const MODEL_DIR = "./interactive_module_quantized_592547_2023_03_19_sam6_long_uncertain.onnx"
         const URL: string = MODEL_DIR;
         // const URL: string = process.env.MODEL_DIR;
