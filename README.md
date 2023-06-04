@@ -63,8 +63,6 @@ Currently, the alpha-matting algorithm is being used to achieve image cutout. Th
 | Image 2 | ![Mask 1](server/assets/4_mask.png) | ![Result 2](server/assets/4_mat_alpha.png) |
 
 
-## Export ONNX
-todo
 ## Contributing
 
 Contributions to the Segment Matting project are welcome. 
