@@ -42,7 +42,7 @@ To get started with the Segment Matting project, follow these steps:
 ```
 - Export ONNX model.To export the ONNX model, make sure to download the official model before proceeding with this step. Please refer to the previous steps for detailed instructions.
 ```shell
-python scripts/export_onnx_model.py --checkpoint server/model/{your model}.pth --model-type {you model type} --output web/public/sam_quantized.onnx 
+python scripts/export_onnx.py --checkpoint server/model/{your model}.pth --model-type {you model type} --output server/model/sam.onnx --return-single-mask --quantize-out --output web/public/sam_quantized.onnx
 ```
 - Start the frontend development server:
 ```shell
