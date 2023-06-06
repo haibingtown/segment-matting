@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import * as _ from "underscore";
 import Canvas from "./Canvas";
-import FeatureSummary from "./FeatureSummary";
 import {
   AnnotationProps,
   modelInputProps,

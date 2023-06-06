@@ -4,7 +4,6 @@ import * as ort from 'onnxruntime-web';
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./assets/scss/App.scss";
-import Footer from "./components/Footer";
 import getFile from "./components/helpers/getFile";
 import { handleImageScale } from "./components/helpers/ImageHelper";
 import { modelScaleProps } from "./components/helpers/Interface";
@@ -22,11 +21,8 @@ import {
   setParmsandQueryEraseModel,
   setParmsandQueryModel,
 } from "./components/helpers/modelAPI";
-import photos from "./components/helpers/photos";
-import HomePage from "./components/HomePage";
 import AppContext from "./components/hooks/createContext";
-import LegalText from "./components/LegalText";
-import NavBar from "./components/Navbar";
+
 import Stage from "./components/Stage";
 // import CookieText from "./CookieText";
 
