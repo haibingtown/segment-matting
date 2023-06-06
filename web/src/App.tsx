@@ -514,9 +514,7 @@ const App = () => {
           path="/"
           element={
             <div className={`flex flex-col h-full overflow-hidden`}>
-              {/*
-              <NavBar resetState={handleResetState} />
-              */}
+
               <Stage
                 scale={modelScale}
                 handleResetState={handleResetState}
@@ -527,7 +525,7 @@ const App = () => {
                 handleSelectedImage={handleSelectedImage}
                 image={image}
               />
-              {/* <Footer /> */}
+
             </div>
           }
         />

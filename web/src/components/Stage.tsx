@@ -21,6 +21,7 @@ import MobileSegmentDrawer from "./MobileSegmentDrawer";
 import PointsModal from "./PointsModal";
 import SegmentDrawer from "./SegmentDrawer";
 import ToolTip from "./ToolTip";
+import Animate from "./hooks/Animation";
 
 type Points = { sx: number; sy: number; x: number; y: number };
 
@@ -134,6 +135,37 @@ const Stage = ({
     );
   };
 
+  // const downloadCrop = (ref: any) => {
+  //   let newCanvas = null;
+  //   try {
+  //     const canvas = ref!.toCanvas().getContext("2d");
+
+  //     let w = ref.width();
+  //     let h = ref.height();
+  //     const pix: { x: number[]; y: number[] } = { x: [], y: [] };
+  //     const imageData = canvas.getImageData(0, 0, w, h);
+
+  //     const dataUrl = canvas.toDataURL('image/png');
+  //     const link = document.createElement('a');
+  //     link.href = dataUrl;
+  //     link.download = 'image.png';
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     document.body.removeChild(link);
+  //   }
+  // }
+
+  const downloadImage = (canvas: any) =>{
+    const dataUrl = canvas.toDataURL('image/png');
+    const link = document.createElement('a');
+    link.href = dataUrl;
+    link.download = 'image.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+
   const doHandleCreateSticker = () => {
     if (konvaRef.current === null) return;
 
@@ -170,6 +202,7 @@ const Stage = ({
         // w = 1 + pix.x[n] - pix.x[0];
         // h = 1 + pix.y[n] - pix.y[0];
         // const cut = canvas.getImageData(pix.x[0], pix.y[0], w, h);
+
         const cut = imageData
         canvas.width = w;
         canvas.height = h;
@@ -210,7 +243,8 @@ const Stage = ({
       svgLayer.add(imageNode);
       svgLayer.add(pathNode);
       const newSticker = cropImageFromCanvasTS(konvaClone);
-      if (newSticker) newStickers.push(newSticker);
+      downloadImage(newSticker)
+      // if (newSticker) newStickers.push(newSticker);
       imageNode.remove();
       pathNode.remove();
       if (isMobile && counter === MOBILE_CUTOUT_LIMIT) break;
@@ -677,6 +711,27 @@ const Stage = ({
                   isHoverToolTip={[isHoverToolTip, setIsHoverToolTip]}
                   allText={[allText, setAllText]}
                 />
+
+<>
+
+              <Animate >
+                  <p className="my-1 text-xs text-blue-700">See Cut-outs</p>
+                  <div className="overflow-y-auto h-[30rem] text-center">
+                    {stickers.map((el: HTMLCanvasElement, i) => (
+                      <img
+                        key={i}
+                        className={`sticker m-5 max-w-[75%] max-h-20 md:max-h-24 lg:max-h-28 xl:max-h-32 cursor-pointer inline hover:opacity-100 ${
+                          i === activeSticker ? "sticker-select" : ""
+                        }`}
+                        alt="sticker"
+                        src={el.toDataURL()}
+                        // onClick={(e) => handleStickerClick(i)}
+                      />
+                    ))}
+                  </div>
+                </Animate>
+
+              </>
               </Profiler>
             </div>
             <MobileSegmentDrawer

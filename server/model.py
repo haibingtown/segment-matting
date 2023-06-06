@@ -7,6 +7,8 @@ from flask_cors import CORS
 
 from segment_anything import SamPredictor, sam_model_registry
 
+import server.matting
+
 app = Flask(__name__)
 CORS(app)
 
@@ -30,26 +32,32 @@ def home():
 
 @app.route('/segment_everything_box_model', methods=['POST'])
 def process_image():
-    # 从请求中获取图片数据
     image_data = request.data
 
-    # 将二进制数据转换为PIL图像对象
     pil_image = Image.open(io.BytesIO(image_data))
 
-    # 将图像转换为Numpy数组
     np_image = np.array(pil_image)
 
     predictor.set_image(np_image)
 
     image_embedding = predictor.get_image_embedding().cpu().numpy()
 
-    # 将二进制数据转换为Base64字符串
     result_base64 = base64.b64encode(image_embedding.tobytes()).decode('utf-8')
-
-    # 添加到结果列表
     result_list = [result_base64]
     return jsonify(result_list)
 
+@app.route('/matting', methods=['POST'])
+def matting():
+    image_data = request.data
+    # 将二进制数据转换为PIL图像对象
+    image = Image.open(io.BytesIO(image_data))
+    mask = Image.open(io.BytesIO(image_data))
+
+    image_matting = server.matting.matting(image, mask)
+
+    result_base64 = base64.b64encode(image_matting.tobytes()).decode('utf-8')
+    result_list = [result_base64]
+    return jsonify(result_list)
 
 if __name__ == '__main__':
     app.run()

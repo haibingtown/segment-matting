@@ -3,7 +3,7 @@ import { Button, Checkbox } from "react-daisyui";
 import { useDropzone } from "react-dropzone";
 import PhotoAlbum from "react-photo-album";
 import { NavLink } from "react-router-dom";
-import photos from "./helpers/photos";
+// import photos from "./helpers/photos";
 import AppContext from "./hooks/createContext";
 export interface ImagePickerProps {
   handleSelectedImage: (
@@ -46,15 +46,15 @@ const ImagePicker = ({
 
   const isMobile = window.innerWidth < 768;
 
-  const downloadAllImageResponses = () => {
-    photos.forEach((photo, i) => {
-      setTimeout(() => {
-        handleSelectedImage(new URL(photo.src, location.origin), {
-          shouldDownload: true,
-        });
-      }, i * 30000);
-    });
-  };
+  // const downloadAllImageResponses = () => {
+  //   photos.forEach((photo, i) => {
+  //     setTimeout(() => {
+  //       handleSelectedImage(new URL(photo.src, location.origin), {
+  //         shouldDownload: true,
+  //       });
+  //     }, i * 30000);
+  //   });
+  // };
 
   const handleAttemptContinue = () => {
     setAcceptedTerms(true);
@@ -193,13 +193,6 @@ const ImagePicker = ({
           showGallery ? "fade-in" : ""
         }`}
       >
-        <PhotoAlbum
-          layout={isMobile ? "columns" : "rows"}
-          photos={photos}
-          columns={1}
-          onClick={(e: any) => handleSelectedImage(e.target.src)}
-          renderPhoto={image}
-        />
       </div>
     </div>
   );
