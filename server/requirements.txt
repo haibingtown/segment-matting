@@ -4,8 +4,6 @@ numpy==1.23.5
 opencv_contrib_python==4.7.0.72
 opencv_python==4.7.0.72
 opencv_python_headless==4.6.0.66
-Pillow==9.3.0
-Pillow==9.5.0
+Pillow==9.5
 PyMatting==1.1.8
-segment_anything.egg==info
-server==0.0.0
+segment_anything==1.0

@@ -126,7 +126,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.pth
-server/model/
+*.pth
 .idea
 web/node_modules
