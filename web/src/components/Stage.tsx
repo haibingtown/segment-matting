@@ -22,6 +22,9 @@ import PointsModal from "./PointsModal";
 import SegmentDrawer from "./SegmentDrawer";
 import ToolTip from "./ToolTip";
 import Animate from "./hooks/Animation";
+import { requestMatting } from "./helpers/mattingAPI";
+import { handleImageScale } from "./helpers/ImageHelper";
+
 
 type Points = { sx: number; sy: number; x: number; y: number };
 
@@ -145,6 +148,31 @@ const Stage = ({
     document.body.removeChild(link);
   }
 
+  const downloadMattingMask = (masCanvas: any) => {
+
+    // 将新的 canvas 转换为 Blob 对象
+    masCanvas.toBlob((maskData: Blob | null) => {
+      if(maskData){
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx || !image) return;
+        // const { height, width, uploadScale } = handleImageScale(image);
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(
+          (imageData) => {
+            imageData && requestMatting({imageData, maskData})
+          },
+          "image/jpeg",
+          1.0
+        );
+
+      }
+    }, 'image/png');
+    
+  }
+
 
   const doHandleCreateSticker = () => {
     if (konvaRef.current === null) return;
@@ -223,7 +251,8 @@ const Stage = ({
       svgLayer.add(imageNode);
       svgLayer.add(pathNode);
       const newSticker = cropImageFromCanvasTS(konvaClone);
-      downloadImage(newSticker)
+      // downloadImage(newSticker)
+      downloadMattingMask(newSticker)
       // if (newSticker) newStickers.push(newSticker);
       // imageNode.remove();
       // pathNode.remove();
@@ -694,7 +723,7 @@ const Stage = ({
 
 <>
 
-              <Animate >
+              {/* <Animate >
                   <p className="my-1 text-xs text-blue-700">See Cut-outs</p>
                   <div className="overflow-y-auto h-[30rem] text-center">
                     {stickers.map((el: HTMLCanvasElement, i) => (
@@ -709,7 +738,7 @@ const Stage = ({
                       />
                     ))}
                   </div>
-                </Animate>
+                </Animate> */}
 
               </>
               </Profiler>

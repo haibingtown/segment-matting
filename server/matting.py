@@ -2,7 +2,7 @@ from pymatting import cutout
 import numpy as np
 import cv2
 
-from server.matting.utils import image_to_mask
+# from server.matting.utils import image_to_mask
 
 
 def mask_to_trimap(mask, dilation_size=10, erosion_size=10):
@@ -23,7 +23,7 @@ def mask_to_trimap(mask, dilation_size=10, erosion_size=10):
 
 def matting(image, mask):
     image = cv2.imread(image_path)
-    mask = image_to_mask(mask_path)
+    # mask = image_to_mask(mask_path)
     mask = cv2.resize(mask, (image.shape[1], image.shape[0]))
 
     return mask
@@ -34,12 +34,12 @@ trimap_path = 'assets/4_trimp.png'
 cout_path = 'assets/4_mat_alpha.png'
 
 image = cv2.imread(image_path)
-mask = image_to_mask(mask_path)
-mask = cv2.resize(mask, (image.shape[1], image.shape[0]))
-trimap = mask_to_trimap(mask, 20, 20)
-cv2.imwrite(trimap_path, trimap)
-cutout(
-    image_path,
-    trimap_path,
-    cout_path
-)
+# mask = image_to_mask(mask_path)
+# mask = cv2.resize(mask, (image.shape[1], image.shape[0]))
+# trimap = mask_to_trimap(mask, 20, 20)
+# cv2.imwrite(trimap_path, trimap)
+# cutout(
+#     image_path,
+#     trimap_path,
+#     cout_path
+# )

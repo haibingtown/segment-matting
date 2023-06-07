@@ -143,3 +143,8 @@ export interface StageProps {
   isStandalone?: boolean;
   model?: InferenceSession | null;
 }
+
+export interface mattingDataProps {
+  imageData: any;
+  maskData: any;
+}

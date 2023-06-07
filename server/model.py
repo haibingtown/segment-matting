@@ -1,9 +1,11 @@
-from flask import Flask, request, jsonify
+import cv2
+from flask import Flask, Response, request, jsonify
 from PIL import Image
 import numpy as np
 import io
 import base64
 from flask_cors import CORS
+from rembg.bg import alpha_matting_cutout,post_process
 
 from segment_anything import SamPredictor, sam_model_registry
 
@@ -48,16 +50,19 @@ def process_image():
 
 @app.route('/matting', methods=['POST'])
 def matting():
-    image_data = request.data
-    # 将二进制数据转换为PIL图像对象
-    image = Image.open(io.BytesIO(image_data))
-    mask = Image.open(io.BytesIO(image_data))
+    image = Image.open(request.files['image'])
+    mask = Image.open(request.files['mask'])
+    mask = mask.convert('L')
+    mask = mask.resize(image.size)
+    mask = mask.point(lambda p: p > 0 and 255)
+    mask = Image.fromarray(post_process(np.array(mask)))
+    result = alpha_matting_cutout(image, mask, 240, 10, 20)
 
-    image_matting = server.matting.matting(image, mask)
+    image_stream = io.BytesIO()
+    result.save(image_stream, format='png')
+    image_stream.seek(0)
 
-    result_base64 = base64.b64encode(image_matting.tobytes()).decode('utf-8')
-    result_list = [result_base64]
-    return jsonify(result_list)
+    return Response(image_stream, mimetype='image/png')
 
 if __name__ == '__main__':
     app.run()
