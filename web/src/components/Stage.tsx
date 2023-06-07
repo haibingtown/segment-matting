@@ -135,26 +135,6 @@ const Stage = ({
     );
   };
 
-  // const downloadCrop = (ref: any) => {
-  //   let newCanvas = null;
-  //   try {
-  //     const canvas = ref!.toCanvas().getContext("2d");
-
-  //     let w = ref.width();
-  //     let h = ref.height();
-  //     const pix: { x: number[]; y: number[] } = { x: [], y: [] };
-  //     const imageData = canvas.getImageData(0, 0, w, h);
-
-  //     const dataUrl = canvas.toDataURL('image/png');
-  //     const link = document.createElement('a');
-  //     link.href = dataUrl;
-  //     link.download = 'image.png';
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     document.body.removeChild(link);
-  //   }
-  // }
-
   const downloadImage = (canvas: any) =>{
     const dataUrl = canvas.toDataURL('image/png');
     const link = document.createElement('a');
@@ -245,13 +225,13 @@ const Stage = ({
       const newSticker = cropImageFromCanvasTS(konvaClone);
       downloadImage(newSticker)
       // if (newSticker) newStickers.push(newSticker);
-      imageNode.remove();
-      pathNode.remove();
+      // imageNode.remove();
+      // pathNode.remove();
       if (isMobile && counter === MOBILE_CUTOUT_LIMIT) break;
     }
-    setActiveSticker(0);
-    setStickers([...(newStickers || []), ...(stickers || [])]);
-    handleResetInteraction();
+    // setActiveSticker(0);
+    // setStickers([...(newStickers || []), ...(stickers || [])]);
+    // handleResetInteraction();
     setIsLoading(false);
   };
 
