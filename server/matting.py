@@ -32,9 +32,9 @@ def matting(image, mask):
 
 
 if __name__ == '__main__':
-    image_path = "/Users/haibing/dev/data/matting/9.png"
-    mask_path = "/Users/haibing/dev/data/matting/9_mask.png"
-    result_path = "/Users/haibing/dev/data/matting/9_alpha.png"
+    image_path = "test/9.png"
+    mask_path = "test/9_mask.png"
+    result_path = "test/9_alpha.png"
     image = Image.open(image_path)
     mask = Image.open(mask_path)
 
