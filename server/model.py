@@ -48,21 +48,20 @@ def process_image():
     result_list = [result_base64]
     return jsonify(result_list)
 
+
 @app.route('/matting', methods=['POST'])
 def matting():
     image = Image.open(request.files['image'])
     mask = Image.open(request.files['mask'])
-    mask = mask.convert('L')
-    mask = mask.resize(image.size)
-    mask = mask.point(lambda p: p > 0 and 255)
-    mask = Image.fromarray(post_process(np.array(mask)))
-    result = alpha_matting_cutout(image, mask, 240, 10, 20)
+
+    result = matting(image, mask)
 
     image_stream = io.BytesIO()
     result.save(image_stream, format='png')
     image_stream.seek(0)
 
     return Response(image_stream, mimetype='image/png')
+
 
 if __name__ == '__main__':
     app.run()
