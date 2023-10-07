@@ -1,15 +1,14 @@
 import cv2
 from flask import Flask, Response, request, jsonify
-from PIL import Image
+from PIL import Image, ImageFilter
 import numpy as np
 import io
 import base64
 from flask_cors import CORS
-from rembg.bg import alpha_matting_cutout,post_process
 
 from segment_anything import SamPredictor, sam_model_registry
 
-import server.matting
+# from matting import matting
 
 app = Flask(__name__)
 CORS(app)
@@ -50,11 +49,15 @@ def process_image():
 
 
 @app.route('/matting', methods=['POST'])
-def matting():
+def process_matting():
     image = Image.open(request.files['image'])
     mask = Image.open(request.files['mask'])
+    image = image.resize(mask.size)
 
-    result = matting(image, mask)
+    mask = mask.split()[3]
+    mask = mask.filter(ImageFilter.GaussianBlur(radius=2))
+    result = Image.new('RGBA', image.size)
+    result.paste(image, (0, 0), mask=mask)
 
     image_stream = io.BytesIO()
     result.save(image_stream, format='png')
