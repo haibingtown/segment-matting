@@ -55,7 +55,7 @@ def process_matting():
     image = image.resize(mask.size)
 
     mask = mask.split()[3]
-    mask = mask.filter(ImageFilter.GaussianBlur(radius=2))
+    mask = mask.filter(ImageFilter.GaussianBlur(radius=1))
     image.putalpha(mask)
 
     image_stream = io.BytesIO()
