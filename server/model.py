@@ -57,7 +57,7 @@ def process_matting():
     mask = mask.split()[3]
     mask = mask.filter(ImageFilter.GaussianBlur(radius=2))
     result = Image.new('RGBA', image.size)
-    result.paste(image, (0, 0), mask=mask)
+    image.putalpha(mask)
 
     image_stream = io.BytesIO()
     result.save(image_stream, format='png')
