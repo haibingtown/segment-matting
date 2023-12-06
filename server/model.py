@@ -1,4 +1,5 @@
 import cv2
+from PIL.Image import Resampling
 from flask import Flask, Response, request, jsonify
 from PIL import Image, ImageFilter
 import numpy as np
@@ -54,8 +55,19 @@ def process_matting():
     mask = Image.open(request.files['mask'])
     image = image.resize(mask.size)
 
+    width = image.width
+    height = image.height
+    ratio = 2
+    if width >= 1024:
+        ratio = 4
+
     mask = mask.split()[3]
-    mask = mask.filter(ImageFilter.GaussianBlur(radius=1))
+    mask = mask.resize((width // ratio, height // ratio), Resampling.BICUBIC)
+    mask = mask.filter(ImageFilter.SMOOTH)
+    # # mask = mask.filter(ImageFilter.SMOOTH)
+    mask = mask.resize((width, height),  Resampling.BILINEAR)
+    #mask = mask.split()[3]
+    #mask = mask.filter(ImageFilter.GaussianBlur(radius=2))
     image.putalpha(mask)
 
     image_stream = io.BytesIO()
