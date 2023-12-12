@@ -38,6 +38,10 @@ def process_image():
 
     pil_image = Image.open(io.BytesIO(image_data))
 
+    # 默认尺寸压缩
+    if pil_image.width > 2048 or pil_image.height > 2048:
+        pil_image.thumbnail((2048, 2048))
+
     np_image = np.array(pil_image)
 
     predictor.set_image(np_image)
