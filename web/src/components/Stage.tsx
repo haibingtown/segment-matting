@@ -153,21 +153,14 @@ const Stage = ({
     // 将新的 canvas 转换为 Blob 对象
     masCanvas.toBlob((maskData: Blob | null) => {
       if(maskData){
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        if (!ctx || !image) return;
-        // const { height, width, uploadScale } = handleImageScale(image);
-        canvas.width = image.naturalWidth;
-        canvas.height = image.naturalHeight;
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-        canvas.toBlob(
-          (imageData) => {
-            imageData && requestMatting({imageData, maskData})
-          },
-          "image/jpeg",
-          1.0
-        );
-
+        requestMatting({image, maskData})
+        // canvas.toBlob(
+        //   (imageData) => {
+        //     imageData && requestMatting({canvas, maskData})
+        //   },
+        //   "image/jpeg",
+        //   1.0
+        // );
       }
     }, 'image/png');
     

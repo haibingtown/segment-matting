@@ -145,6 +145,6 @@ export interface StageProps {
 }
 
 export interface mattingDataProps {
-  imageData: any;
+  image: any;
   maskData: any;
 }

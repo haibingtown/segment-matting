@@ -80,6 +80,25 @@ def process_matting():
 
     return Response(image_stream, mimetype='image/png')
 
+@app.route('/mask', methods=['POST'])
+def process_mask():
+    mask = Image.open(request.files['mask'])
+    width = mask.width
+    height = mask.height
+    ratio = 2
+    if width >= 1024:
+        ratio = 4
+
+    mask = mask.split()[3]
+    mask = mask.resize((width // ratio, height // ratio), Resampling.BICUBIC)
+    mask = mask.filter(ImageFilter.SMOOTH)
+    # # mask = mask.filter(ImageFilter.SMOOTH)
+    mask = mask.resize((width, height),  Resampling.BILINEAR)
+
+    image_stream = io.BytesIO()
+    mask.save(image_stream, format='png')
+    image_stream.seek(0)
+    return Response(image_stream, mimetype='image/png')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
