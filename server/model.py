@@ -16,7 +16,7 @@ CORS(app)
 
 
 def init():
-    checkpoint = "model/sam_vit_h_4b8939.pth"
+    checkpoint = "../../../model/sam_vit_h_4b8939.pth"
     model_type = "vit_h"
     sam = sam_model_registry[model_type](checkpoint=checkpoint)
     sam.to(device='cpu')
@@ -83,11 +83,15 @@ def process_matting():
 @app.route('/mask', methods=['POST'])
 def process_mask():
     mask = Image.open(request.files['mask'])
-    width = mask.width
-    height = mask.height
+    width = int(request.form['width'])
+    height = int(request.form['height'])
     ratio = 2
     if width >= 1024:
         ratio = 4
+    elif width >= 2048:
+        ratio = 6
+    elif width >= 3072:
+        ratio = 8
 
     mask = mask.split()[3]
     mask = mask.resize((width // ratio, height // ratio), Resampling.BICUBIC)
@@ -101,4 +105,4 @@ def process_mask():
     return Response(image_stream, mimetype='image/png')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port= 5001)
