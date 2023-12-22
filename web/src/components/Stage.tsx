@@ -150,10 +150,13 @@ const Stage = ({
 
   const downloadMattingMask = (masCanvas: any) => {
 
+    const width = scale?.width
+    const height = scale?.height
+
     // 将新的 canvas 转换为 Blob 对象
     masCanvas.toBlob((maskData: Blob | null) => {
       if(maskData){
-        requestMatting({image, maskData})
+        requestMatting({image, maskData, width, height})
         // canvas.toBlob(
         //   (imageData) => {
         //     imageData && requestMatting({canvas, maskData})

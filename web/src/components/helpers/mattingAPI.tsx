@@ -35,13 +35,15 @@ const downloadCanvas = (canvas: any) => {
 
 const requestMatting = ({
     image,
-    maskData
+    maskData,
+    width,
+    height
 }: mattingDataProps)=> {
 
     const formData = new FormData();
     formData.append('mask', maskData, 'mask.png');
-    // formData.append('width', image.width)
-    // formData.append('height', image.height)
+    formData.append('width', width)
+    formData.append('height', height)
 
     const segRequest =
      fetch(`${API_MATTING}`, {

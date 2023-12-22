@@ -147,4 +147,6 @@ export interface StageProps {
 export interface mattingDataProps {
   image: any;
   maskData: any;
+  width: any;
+  height: any;
 }
