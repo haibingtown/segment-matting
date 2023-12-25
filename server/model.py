@@ -83,21 +83,36 @@ def process_matting():
 @app.route('/mask', methods=['POST'])
 def process_mask():
     mask = Image.open(request.files['mask'])
+    # 原始尺寸
     width = int(request.form['width'])
     height = int(request.form['height'])
+
+    # 压缩处理
+    max_scale = 4096
+    if width > max_scale or height > max_scale:
+        if width > height:
+            height = int(max_scale * height / width)
+            width = max_scale
+        else:
+            width = int(max_scale * width / height)
+            height = max_scale
+
+    # 缩放比例
     ratio = 2
-    if width >= 1024:
-        ratio = 4
-    elif width >= 2048:
-        ratio = 6
-    elif width >= 3072:
+    if width > 3072:
+        ratio = 12
+    elif width > 2048:
         ratio = 8
+    elif width > 1024:
+        ratio = 4
 
     mask = mask.split()[3]
     mask = mask.resize((width // ratio, height // ratio), Resampling.BICUBIC)
-    mask = mask.filter(ImageFilter.SMOOTH)
+    mask = mask.filter(ImageFilter.SMOOTH_MORE)
     # # mask = mask.filter(ImageFilter.SMOOTH)
     mask = mask.resize((width, height),  Resampling.BILINEAR)
+    mask = mask.point(lambda x: 0 if x < 100 else 255)
+    mask = mask.filter(ImageFilter.GaussianBlur(radius=1))
 
     image_stream = io.BytesIO()
     mask.save(image_stream, format='png')
@@ -105,4 +120,4 @@ def process_mask():
     return Response(image_stream, mimetype='image/png')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port= 5001)
+    app.run(host='0.0.0.0')
