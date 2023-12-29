@@ -132,7 +132,7 @@ const SegmentDrawer = ({
               >
                 <span {...getRootProps()} className="flex text-sm">
                   <input {...getInputProps()} />
-                  <img src="assets/upload_arrow.svg" className="w-5 mr-1" />
+                  <img src="static/assets/upload_arrow.svg" className="w-5 mr-1" />
                   Upload
                 </span>
               </button>
@@ -148,7 +148,7 @@ const SegmentDrawer = ({
 
                 }}
               >
-                <img src="assets/icn-image-gallery.svg" className="w-5 mr-1" />
+                <img src="static/assets/icn-image-gallery.svg" className="w-5 mr-1" />
                 <span className="text-sm">Download</span>
               </button>
             </div>

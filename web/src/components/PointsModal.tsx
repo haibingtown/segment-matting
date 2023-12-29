@@ -25,7 +25,7 @@ const PointsModal = () => {
             </a>
           </span>
         </div>
-        <video src="../assets/tut-negative-points.mp4" autoPlay playsInline />
+        {/* <video src="../assets/tut-negative-points.mp4" autoPlay playsInline /> */}
         <h3 className="my-2 text-2xl">Add and subtract areas</h3>
         <p>
           Mask areas by adding points. Select <b>Add Area</b>, then select the

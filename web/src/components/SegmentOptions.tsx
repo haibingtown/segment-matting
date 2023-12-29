@@ -150,7 +150,7 @@ const SegmentOptions = ({
             setShowLoadingModal(true);
           }}
         >
-          <img src="assets/erase.svg" />
+          <img src="static/assets/erase.svg" />
           <span className="pl-2 opacity-70">Erase Object</span>
         </button> */}
         <button

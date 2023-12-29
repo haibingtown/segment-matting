@@ -81,7 +81,7 @@ const Stage = ({
   const [shouldShowHomepageOverlay, setShouldShowHomepageOverlay] =
     useState(false);
   const DRAG_THRESHOLD = 4;
-  const HOMEPAGE_IMAGE = "/assets/gallery/dogs-with-stick.jpg";
+  const HOMEPAGE_IMAGE = "/static/assets/gallery/dogs-with-stick.jpg";
   const HOMEPAGE_TIME_LIMIT = 5000;
   const MOBILE_CUTOUT_LIMIT = 30;
   const konvaRef = useRef<Konva.Stage>(null);

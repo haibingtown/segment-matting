@@ -13,7 +13,7 @@ import {
 // const API_ENDPOINT          = "https://model-zoo.metademolab.com/predictions/segment_everything_box_model";
 const API_ENDPOINT          = "http://127.0.0.1:5000/segment_everything_box_model";
 // const API_ENDPOINT          = "http://172.19.144.205:5000/segment_everything_box_model"
-const ALL_MASK_API_ENDPOINT = "https://model-zoo.metademolab.com/predictions/automatic_masks";
+// const ALL_MASK_API_ENDPOINT = "https://model-zoo.metademolab.com/predictions/automatic_masks";
 //const API_ENDPOINT = process.env.API_ENDPOINT;
 //const ALL_MASK_API_ENDPOINT = process.env.ALL_MASK_API_ENDPOINT;
 const ERASE_API_ENDPOINT = process.env.ERASE_API_ENDPOINT;
@@ -68,11 +68,11 @@ const queryModelReturnTensors = async ({
   // console.log("image_height, imgName, shouldDownload, shouldNotFetchAllModel:", image_height, imgName, shouldDownload, shouldNotFetchAllModel)
   // console.log("pre-queryModelReturnTensors");
   if (!API_ENDPOINT) return;
-  if (!ALL_MASK_API_ENDPOINT) return;
+  // if (!ALL_MASK_API_ENDPOINT) return;
   // console.log("post-queryModelReturnTensors");
   const segRequest =
     imgName && !shouldDownload
-      ? fetch(`/assets/gallery/${imgName}.txt`)
+      ? fetch(`/static/assets/gallery/${imgName}.txt`)
       : fetch(`${API_ENDPOINT}`, {
           method: "POST",
           body: blob,
@@ -102,7 +102,7 @@ const queryModelReturnTensors = async ({
   //   const allImgName = imgName + ".all";
   //   const allRequest =
   //     imgName && !shouldDownload
-  //       ? fetch(`/assets/gallery/${allImgName}.txt`)
+  //       ? fetch(`/static/assets/gallery/${allImgName}.txt`)
   //       : fetch(`${ALL_MASK_API_ENDPOINT}`, {
   //           method: "POST",
   //           body: blob,
