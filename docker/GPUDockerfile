@@ -10,7 +10,7 @@ RUN pip3 install --upgrade pip && \
 
 ARG version 
 
-RUN pip3 install lama-cleaner==$version
+RUN pip3 install
 
 EXPOSE 8080
 
