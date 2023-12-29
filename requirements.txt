@@ -1,0 +1,9 @@
+Flask==2.3.2
+Flask_Cors==3.0.10
+numpy==1.23.5
+opencv_contrib_python==4.7.0.72
+opencv_python==4.7.0.72
+opencv_python_headless==4.6.0.66
+Pillow==9.5
+PyMatting==1.1.8
+segment_anything==1.0

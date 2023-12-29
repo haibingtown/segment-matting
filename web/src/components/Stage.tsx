@@ -22,6 +22,9 @@ import PointsModal from "./PointsModal";
 import SegmentDrawer from "./SegmentDrawer";
 import ToolTip from "./ToolTip";
 import Animate from "./hooks/Animation";
+import { requestMatting } from "./helpers/mattingAPI";
+import { handleImageScale } from "./helpers/ImageHelper";
+
 
 type Points = { sx: number; sy: number; x: number; y: number };
 
@@ -78,7 +81,7 @@ const Stage = ({
   const [shouldShowHomepageOverlay, setShouldShowHomepageOverlay] =
     useState(false);
   const DRAG_THRESHOLD = 4;
-  const HOMEPAGE_IMAGE = "/assets/gallery/dogs-with-stick.jpg";
+  const HOMEPAGE_IMAGE = "/static/assets/gallery/dogs-with-stick.jpg";
   const HOMEPAGE_TIME_LIMIT = 5000;
   const MOBILE_CUTOUT_LIMIT = 30;
   const konvaRef = useRef<Konva.Stage>(null);
@@ -143,6 +146,27 @@ const Stage = ({
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  }
+
+  const downloadMattingMask = (masCanvas: any) => {
+
+    const width = scale?.width
+    const height = scale?.height
+
+    // 将新的 canvas 转换为 Blob 对象
+    masCanvas.toBlob((maskData: Blob | null) => {
+      if(maskData){
+        requestMatting({image, maskData, width, height})
+        // canvas.toBlob(
+        //   (imageData) => {
+        //     imageData && requestMatting({canvas, maskData})
+        //   },
+        //   "image/jpeg",
+        //   1.0
+        // );
+      }
+    }, 'image/png');
+    
   }
 
 
@@ -223,7 +247,8 @@ const Stage = ({
       svgLayer.add(imageNode);
       svgLayer.add(pathNode);
       const newSticker = cropImageFromCanvasTS(konvaClone);
-      downloadImage(newSticker)
+      // downloadImage(newSticker)
+      downloadMattingMask(newSticker)
       // if (newSticker) newStickers.push(newSticker);
       // imageNode.remove();
       // pathNode.remove();
@@ -694,7 +719,7 @@ const Stage = ({
 
 <>
 
-              <Animate >
+              {/* <Animate >
                   <p className="my-1 text-xs text-blue-700">See Cut-outs</p>
                   <div className="overflow-y-auto h-[30rem] text-center">
                     {stickers.map((el: HTMLCanvasElement, i) => (
@@ -709,7 +734,7 @@ const Stage = ({
                       />
                     ))}
                   </div>
-                </Animate>
+                </Animate> */}
 
               </>
               </Profiler>

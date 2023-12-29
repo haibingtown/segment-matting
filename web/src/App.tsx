@@ -37,10 +37,10 @@ ort.env.wasm.numThreads = 2;
 ort.env.wasm.simd = true;
 // ort.env.wasm.proxy = true;
 ort.env.wasm.wasmPaths = {
-  'ort-wasm.wasm': '/ort-wasm.wasm',
-  'ort-wasm-simd.wasm': '/ort-wasm-simd.wasm',
-  'ort-wasm-threaded.wasm': '/ort-wasm-threaded.wasm',
-  'ort-wasm-simd-threaded.wasm': '/ort-wasm-simd-threaded.wasm'
+  'ort-wasm.wasm': '/static/ort-wasm.wasm',
+  'ort-wasm-simd.wasm': '/static/ort-wasm-simd.wasm',
+  'ort-wasm-threaded.wasm': '/static/ort-wasm-threaded.wasm',
+  'ort-wasm-simd-threaded.wasm': '/static/ort-wasm-simd-threaded.wasm'
 };
 
 // ort.env.webgl.pack = true;
@@ -105,7 +105,7 @@ const App = () => {
     const initModel = async () => {
       try {
         // if (process.env.MODEL_DIR === undefined) return;
-        const MODEL_DIR = "./sam_quantized.onnx";
+        const MODEL_DIR = "./static/sam_quantized.onnx";
         // const MODEL_DIR = "./interactive_module_quantized_592547_2023_03_19_sam6_long_uncertain.onnx"
         const URL: string = MODEL_DIR;
         // const URL: string = process.env.MODEL_DIR;
@@ -115,20 +115,20 @@ const App = () => {
         // console.log("MODEL:", e);
         console.error(e);
       }
-      try {
-        // console.log("MULTI MASK MODEL");
-        // if (process.env.MULTI_MASK_MODEL_DIR === undefined) return;
-        const MULTI_MASK_MODEL_DIR = "./interactive_module_quantized_592547_2023_03_20_sam6_long_all_masks_extra_data_with_ious.onnx";
-        const URL2: string = MULTI_MASK_MODEL_DIR;
-        // console.log("MULTI MASK MODEL URL:", URL2);
-        // const URL2: string = process.env.MULTI_MASK_MODEL_DIR;
-        const multiMaskModel = await InferenceSession.create(URL2);
-        // console.log("multiMaskModel:", multiMaskModel);
-        setMultiMaskModel(multiMaskModel);
-      } catch (e) {
-        // console.log("MULTI MASK MODEL:", e);
-        console.error(e);
-      }
+      // try {
+      //   // console.log("MULTI MASK MODEL");
+      //   // if (process.env.MULTI_MASK_MODEL_DIR === undefined) return;
+      //   const MULTI_MASK_MODEL_DIR = "./interactive_module_quantized_592547_2023_03_20_sam6_long_all_masks_extra_data_with_ious.onnx";
+      //   const URL2: string = MULTI_MASK_MODEL_DIR;
+      //   // console.log("MULTI MASK MODEL URL:", URL2);
+      //   // const URL2: string = process.env.MULTI_MASK_MODEL_DIR;
+      //   const multiMaskModel = await InferenceSession.create(URL2);
+      //   // console.log("multiMaskModel:", multiMaskModel);
+      //   setMultiMaskModel(multiMaskModel);
+      // } catch (e) {
+      //   // console.log("MULTI MASK MODEL:", e);
+      //   console.error(e);
+      // }
     };
     initModel();
   }, []);

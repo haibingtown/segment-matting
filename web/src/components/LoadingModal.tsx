@@ -22,10 +22,10 @@ const LoadingModal = ({ handleResetState }: LoadingModalProps) => {
           <div className="flex flex-col items-center justify-center h-72 modal-box">
             <div className="flex">
               <img className="object-contain w-10 mr-3" src={image?.src} />
-              <img className="mr-3" src="assets/arrow-icn.svg" />
-              <img src="assets/icn-nn.svg" />
-              <img className="mr-3" src="assets/arrow-icn.svg" />
-              <img src="assets/stack.svg" />
+              <img className="mr-3" src="static/assets/arrow-icn.svg" />
+              <img src="static/assets/icn-nn.svg" />
+              <img className="mr-3" src="static/assets/arrow-icn.svg" />
+              <img src="static/assets/stack.svg" />
             </div>
             <p className="py-4 text-sm md:text-lg">
               {isErasing &&

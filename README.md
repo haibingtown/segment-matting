@@ -17,11 +17,24 @@ To get started with the Segment Matting project, follow these steps:
 ```shell
    $ git clone https://github.com/haibingtown/segment-matting.git
 ```
-2. Start the Backend
+2. build the Frontend
+- Navigate to the web directory and install the required dependencies:
+```shell
+    $ cd web
+    $ pnpm i
+```
+- Export ONNX model.To export the ONNX model, make sure to download the official model before proceeding with this step. Please refer to the previous steps for detailed instructions.
+```shell
+python export_onnx.py --checkpoint model/{your model}.pth --model-type {you model type} --output model/sam.onnx --return-single-mask --quantize-out --output web/public/static/sam_quantized.onnx
+```
+- build the frontend:
+```shell
+    $ pnpm run build
+```
+3. Start the Backend
 - Navigate to the server directory and install the required dependencies:
 
 ```shell
-    $ cd server
     $ pip install -r requirements.txt
 ```
 - Add model. Download the official model, and then put it into server/model/ folder.
@@ -34,24 +47,10 @@ To get started with the Segment Matting project, follow these steps:
 ```shell
     $ python model.py
 ```
-3. Start the Frontend
-- Navigate to the web directory and install the required dependencies:
-```shell
-    $ cd web
-    $ npm i
-```
-- Export ONNX model.To export the ONNX model, make sure to download the official model before proceeding with this step. Please refer to the previous steps for detailed instructions.
-```shell
-python scripts/export_onnx.py --checkpoint server/model/{your model}.pth --model-type {you model type} --output server/model/sam.onnx --return-single-mask --quantize-out --output web/public/sam_quantized.onnx
-```
-- Start the frontend development server:
-```shell
-    $ npm start
-```
 4. Access the Application
 Open your web browser and visit http://localhost:3000/ to access the project. You will see as below, then just click Upload button.
 
-![img.png](server/assets/img.png)
+![img.png](assets/img.png)
 
 ## Matting
 
@@ -59,8 +58,8 @@ Currently, the alpha-matting algorithm is being used to achieve image cutout. Th
 
 |         | Mask                                | Matting Result                             |
 |---------|-------------------------------------|--------------------------------------------|
-| Image 1 | ![Mask 1](server/assets/3_mask.png) | ![Result 1](server/assets/3_mat_alpha.png) |
-| Image 2 | ![Mask 2](server/assets/4_mask.png) | ![Result 2](server/assets/4_mat_alpha.png) |
+| Image 1 | ![Mask 1](assets/3_mask.png) | ![Result 1](assets/3_mat_alpha.png) |
+| Image 2 | ![Mask 2](assets/4_mask.png) | ![Result 2](assets/4_mat_alpha.png) |
 
 
 ## Contributing
