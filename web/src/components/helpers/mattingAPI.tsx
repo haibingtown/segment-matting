@@ -3,7 +3,7 @@ import {
     mattingDataProps
   } from "./Interface";
 
-const API_MATTING = "http://127.0.0.1:5000/mask"
+const API_MATTING = "/mask"
 
 const downloadBlob = (blob: any, name: string) => {
     const link = document.createElement("a");

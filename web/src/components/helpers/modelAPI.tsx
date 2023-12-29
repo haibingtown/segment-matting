@@ -11,7 +11,7 @@ import {
 } from "./Interface";
 
 // const API_ENDPOINT          = "https://model-zoo.metademolab.com/predictions/segment_everything_box_model";
-const API_ENDPOINT          = "http://127.0.0.1:5000/segment_everything_box_model";
+const API_ENDPOINT          = "/segment_everything_box_model";
 // const API_ENDPOINT          = "http://172.19.144.205:5000/segment_everything_box_model"
 // const ALL_MASK_API_ENDPOINT = "https://model-zoo.metademolab.com/predictions/automatic_masks";
 //const API_ENDPOINT = process.env.API_ENDPOINT;

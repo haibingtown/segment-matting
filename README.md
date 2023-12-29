@@ -51,7 +51,7 @@ python scripts/export_onnx.py --checkpoint server/model/{your model}.pth --model
 4. Access the Application
 Open your web browser and visit http://localhost:3000/ to access the project. You will see as below, then just click Upload button.
 
-![img.png](server/assets/img.png)
+![img.png](assets/img.png)
 
 ## Matting
 
@@ -59,8 +59,8 @@ Currently, the alpha-matting algorithm is being used to achieve image cutout. Th
 
 |         | Mask                                | Matting Result                             |
 |---------|-------------------------------------|--------------------------------------------|
-| Image 1 | ![Mask 1](server/assets/3_mask.png) | ![Result 1](server/assets/3_mat_alpha.png) |
-| Image 2 | ![Mask 2](server/assets/4_mask.png) | ![Result 2](server/assets/4_mat_alpha.png) |
+| Image 1 | ![Mask 1](assets/3_mask.png) | ![Result 1](assets/3_mat_alpha.png) |
+| Image 2 | ![Mask 2](assets/4_mask.png) | ![Result 2](assets/4_mat_alpha.png) |
 
 
 ## Contributing

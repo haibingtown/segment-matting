@@ -1,6 +1,8 @@
+import os
+
 import cv2
 from PIL.Image import Resampling
-from flask import Flask, Response, request, jsonify
+from flask import Flask, Response, request, jsonify, send_file
 from PIL import Image, ImageFilter
 import numpy as np
 import io
@@ -9,14 +11,13 @@ from flask_cors import CORS
 
 from segment_anything import SamPredictor, sam_model_registry
 
-# from matting import matting
-
-app = Flask(__name__)
+BUILD_DIR = os.environ.get("LAMA_CLEANER_BUILD_DIR", "web/build")
+app = Flask(__name__, static_folder=os.path.join(BUILD_DIR, "static"))
 CORS(app)
 
 
 def init():
-    checkpoint = "../../../model/sam_vit_h_4b8939.pth"
+    checkpoint = "../../model/sam_vit_h_4b8939.pth"
     model_type = "vit_h"
     sam = sam_model_registry[model_type](checkpoint=checkpoint)
     sam.to(device='cpu')
@@ -27,9 +28,9 @@ def init():
 predictor = init();
 
 
-@app.route('/', methods=['GET'])
-def home():
-    return jsonify("OK")
+@app.route("/")
+def index():
+    return send_file(os.path.join(BUILD_DIR, "index.html"))
 
 
 @app.route('/segment_everything_box_model', methods=['POST'])
@@ -120,4 +121,4 @@ def process_mask():
     return Response(image_stream, mimetype='image/png')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',port=5001)
