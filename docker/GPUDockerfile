@@ -12,6 +12,11 @@ ARG version
 
 RUN pip3 install
 
-EXPOSE 8080
+# 将项目文件（包括 requirements.txt）复制到工作目录
+COPY . /app
 
-CMD ["bash"]
+RUN pip install --no-cache-dir -r requirements.txt
+
+ENV PYTHONPATH="${PYTHONPATH}:/app"
+
+ENTRYPOINT ["python", "model.py"]

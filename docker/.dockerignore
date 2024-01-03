@@ -1,1 +1,9 @@
-node_modules
+../web/node_modules/.bin
+*.ckpt
+*.pt
+.vscode
+*.onnx
+__pycache__
+ocrs
+models/*
+assets/*

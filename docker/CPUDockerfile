@@ -14,11 +14,10 @@ ARG version
 WORKDIR /app
 
 # 将项目文件（包括 requirements.txt）复制到工作目录
-COPY *.py /app/
-COPY web/build /app/
+COPY . /app
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 5001
+ENV PYTHONPATH="${PYTHONPATH}:/app"
 
-CMD ["python", "model.py"]
+ENTRYPOINT ["python", "model.py"]
