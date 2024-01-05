@@ -17,10 +17,10 @@ CORS(app)
 
 
 def init():
-    checkpoint = "../../model/sam_vit_h_4b8939.pth"
+    checkpoint = "./model/sam_vit_h_4b8939.pth"
     model_type = "vit_h"
     sam = sam_model_registry[model_type](checkpoint=checkpoint)
-    sam.to(device='cpu')
+    sam.to(device='cuda')
     predictor = SamPredictor(sam)
     return predictor
 

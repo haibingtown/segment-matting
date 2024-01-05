@@ -5,17 +5,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libsm6 libxext6 ffmpeg libfontconfig1 libxrender1 libgl1-mesa-glx \
     curl python3-pip
 
-RUN pip3 install --upgrade pip && \
-    pip3 install torch==1.13.1 xformers==0.0.16rc425
+RUN pip3 install --upgrade pip
+RUN pip3 install torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu118
+RUN pip3 install xformers==0.0.22.post4 --index-url https://download.pytorch.org/whl/cu118
 
 ARG version 
 
-RUN pip3 install
+# 设置工作目录
+WORKDIR /app
 
 # 将项目文件（包括 requirements.txt）复制到工作目录
 COPY . /app
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 ENV PYTHONPATH="${PYTHONPATH}:/app"
 
